@@ -1,0 +1,47 @@
+<div class="container">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="registration-form">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" class="form-control" formControlName="name">
+            <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched" class="text-danger">
+                <div *ngIf="registerForm.get('name')?.hasError('required')">Name is required.</div>
+                <div *ngIf="registerForm.get('name')?.hasError('minlength')">Name must be at least 2 characters long.
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" class="form-control" formControlName="email">
+            <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="text-danger">
+                <div *ngIf="registerForm.get('email')?.hasError('required')">Email is required.</div>
+                <div *ngIf="registerForm.get('email')?.hasError('email')">Invalid email format.</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="city">City</label>
+            <input id="city" class="form-control" formControlName="city">
+            <div *ngIf="registerForm.get('city')?.invalid && registerForm.get('city')?.touched" class="text-danger">
+                <div *ngIf="registerForm.get('city')?.hasError('required')">City is required.</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="mobileNo">Mobile Number</label>
+            <input id="mobileNo" class="form-control" formControlName="mobileNo">
+            <div *ngIf="registerForm.get('mobileNo')?.invalid && registerForm.get('mobileNo')?.touched"
+                class="text-danger">
+                <div *ngIf="registerForm.get('mobileNo')?.hasError('required')">Mobile Number is required.</div>
+                <div *ngIf="registerForm.get('mobileNo')?.hasError('pattern')">Invalid Mobile Number. Must be 10 digits.
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" *ngIf="formType=='save'"
+            [disabled]="registerForm.invalid">Submit</button>
+
+        <button type="submit" class="btn btn-primary" *ngIf="formType=='update'"
+            [disabled]="registerForm.invalid">Update</button>
+    </form>
+</div>
